@@ -1,0 +1,32 @@
+# vim: set ft=make:
+#
+AR ?= ar
+MPICC ?= mpicc
+LOW_PRECISION ?= double
+HIGH_PRECISION ?= double
+
+OPTIMIZE ?= -O2 -g -fopenmp -Wall
+GSL_INCL ?= $(shell pkg-config --cflags gsl)
+GSL_LIBS ?= $(shell pkg-config --libs gsl)
+
+OPTIONS = $(OPTIMIZE) $(OPT)
+GADGET_TESTDATA_ROOT = $(CURDIR)/../
+
+CFLAGS = $(OPTIONS) $(GSL_INCL)
+CFLAGS += -I../depends/include
+CFLAGS += -I../
+CFLAGS += "-DLOW_PRECISION=$(LOW_PRECISION)"
+CFLAGS += "-DHIGH_PRECISION=$(HIGH_PRECISION)"
+#For tests
+TCFLAGS = $(CFLAGS) -DGADGET_TESTDATA_ROOT=\"$(GADGET_TESTDATA_ROOT)\"
+
+BUNDLEDLIBS = -lbigfile-mpi -lbigfile -lpfft_omp -lfftw3_mpi -lfftw3_omp -lfftw3
+LIBS  = -lm $(GSL_LIBS)
+LIBS += -L../depends/lib $(BUNDLEDLIBS)
+V ?= 0
+
+.objs/%.o: %.c $(INCL) Makefile $(CONFIG)
+	@cmd="$(MPICC) -c -o $@ $(CFLAGS) $<"; \
+	if test "x$(V)" = "x1" ; then echo $$cmd; fi; \
+	mkdir -p `dirname $@`; \
+	echo Compiling $<; $$cmd

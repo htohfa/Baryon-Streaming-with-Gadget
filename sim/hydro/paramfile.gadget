@@ -1,0 +1,78 @@
+#  Relevant files
+
+InitCondFile = ICS/IC
+OutputDir = box_200_128_cooling_on_vbc_on
+TreeCoolFile = ../TREECOOL_fg_june11
+OutputList = 0.001,0.002,0.003,0.004, 0.005,0.007,0.008, 0.009, 0.01, 0.05, 49, 9, 2, 1, 0 
+
+#0.1,0.11, 0.15, 0.2,0.299,0.3,0.33333,0.4,0.5,0.66666,0.75,0.9
+
+# CPU time -limit
+#MaxNumNgbDeviation = 2
+TimeLimitCPU = 100000 #= 8 hours
+SplitGravityTimestepsOn = 1
+
+# Code options
+
+#  Characteristics of run
+
+TimeMax = 1.00000
+
+Omega0 = 0.2814       # Total matter density  (at z=0)
+OmegaLambda = 0.7186      # Cosmological constant (at z=0)
+OmegaBaryon = 0.0464       # Baryon density        (at z=0)
+HubbleParam =  0.697      # Hubble paramater (may be used for power spec parameterization)
+
+InitGasTemp = 2701
+CoolingOn = 1
+StarformationOn = 0
+BlackHoleOn = 0
+HydroOn = 1
+MetalReturnOn = 0
+DensityIndependentSphOn = 1   #maybe this is next to turn off if still high T's
+StarformationCriterion = density,h2
+RadiationOn = 0
+MassiveNuLinRespOn = 0
+WindOn = 0
+MetalCoolFile = ../cooling_metal_UVB
+
+SnapshotWithFOF = 1
+FOFHaloLinkingLength = 0.2
+FOFHaloMinLength = 32
+
+MinGasTemp = 2.0
+
+MaxMemSizePerNode = 2000
+
+#----------------------BH Stuff-------------------------
+BlackHoleKineticOn = 1 # switch to kinetic feedback mode when the BH accretion rate is low
+
+BlackHoleFeedbackFactor = 0.05
+BlackHoleFeedbackMethod = spline | mass
+SeedBlackHoleMass = 5.0e-5
+BlackHoleAccretionFactor = 100.0
+BlackHoleNgbFactor = 2.0
+BlackHoleEddingtonFactor = 3.0
+
+MinFoFMassForNewSeed = 1
+TimeBetweenSeedingSearch = 1.03
+WriteBlackHoleDetails = 1
+
+#----------------------SFR Stuff-------------------------
+
+CritPhysDensity = 0       #  critical physical density for star formation in
+#  hydrogen number density in cm^(-3)
+
+CritOverDensity = 1000   #  overdensity threshold value
+
+QuickLymanAlphaProbability = 0 # Set to 1.0 to turn dense gas directly into stars.
+
+WindModel = ofjt10,isotropic
+WindEfficiency = 2.0
+WindEnergyFraction = 1.0
+WindSigma0 = 353.0 #km/s
+WindSpeedFactor = 3.7
+
+WindFreeTravelLength = 20
+WindFreeTravelDensFac = 0.1
+

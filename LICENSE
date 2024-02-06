@@ -1,0 +1,13 @@
+LICENSE
+-------
+
+Many files were released as Gadget-2 in GPL. GPL permits re-licensing them in GPLv3.
+
+Other files without license issues are released in GPLv3.
+
+The file with a potential license issue is sfr_eff.c which originated from files in P-Gadget.
+The algorithms are 13+ years old and it is unclear if the original authors are
+still interested in keeping them private.
+
+- Yu Feng <rainwoodman@gmail.com>
+
